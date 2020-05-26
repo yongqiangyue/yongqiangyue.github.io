@@ -17,16 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>岳岳博客</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="岳岳博客">
-<meta property="og:url" content="https://yongqiangyue.github.io/index.html">
+  <title>深度学习-Faster R-CNN | 岳岳博客</title>
+  <meta name="description" content="读论文 debug code  核心点：RPN目标：能口述网络结构图，能实现nms算法，能实现IOU时间点：20190923 读第一遍论文，整理中间所有的知识点知识点1: 准确率和召回率，mAP准确率：认为是正样本中有多少被猜对了召回率：所有正样本中有多少被找出了了ground truth: 正确打标签的训练数据（x, label）,其中label是正确的标签AP（Average Precisi">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习-Faster R-CNN">
+<meta property="og:url" content="https://yongqiangyue.github.io/2019/09/23/深度学习-Faster-R-CNN-2/index.html">
 <meta property="og:site_name" content="岳岳博客">
+<meta property="og:description" content="读论文 debug code  核心点：RPN目标：能口述网络结构图，能实现nms算法，能实现IOU时间点：20190923 读第一遍论文，整理中间所有的知识点知识点1: 准确率和召回率，mAP准确率：认为是正样本中有多少被猜对了召回率：所有正样本中有多少被找出了了ground truth: 正确打标签的训练数据（x, label）,其中label是正确的标签AP（Average Precisi">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-05-26T08:29:23.089Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="岳岳博客">
+<meta name="twitter:title" content="深度学习-Faster R-CNN">
+<meta name="twitter:description" content="读论文 debug code  核心点：RPN目标：能口述网络结构图，能实现nms算法，能实现IOU时间点：20190923 读第一遍论文，整理中间所有的知识点知识点1: 准确率和召回率，mAP准确率：认为是正样本中有多少被猜对了召回率：所有正样本中有多少被找出了了ground truth: 正确打标签的训练数据（x, label）,其中label是正确的标签AP（Average Precisi">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://yongqiangyue.github.io/index.html">
+  <link rel="canonical" href="https://yongqiangyue.github.io/2019/09/23/深度学习-Faster-R-CNN-2/index.html">
   
     <link rel="alternate" href="/atom.xml" title="岳岳博客" type="application/atom+xml">
   
@@ -310,252 +315,187 @@
 </aside>
 
   
-  <main class="main" role="main">
   
-  <div class="content article-list">
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-深度学习-Faster-R-CNN-2" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
+    <div class="article-header">
+      
+        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/23/深度学习-Faster-R-CNN-2/">深度学习-Faster R-CNN</a>
+    <h1 class="article-title" itemprop="name">
+      深度学习-Faster R-CNN
     </h1>
   
 
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
+      
+      <div class="article-meta">
+        <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2019/09/23/深度学习-Faster-R-CNN-2/" class="article-date">
-	  <time datetime="2019-09-23T06:52:05.000Z" itemprop="datePublished">9月 23</time>
+	  <time datetime="2019-09-23T06:52:05.000Z" itemprop="datePublished">2019-09-23</time>
 	</a>
 </span>
-    
+        
   <span class="article-category">
     <i class="icon icon-folder"></i>
     <a class="article-category-link" href="/categories/深度学习/">深度学习</a>
   </span>
 
-    
+        
   <span class="article-tag">
     <i class="icon icon-tags"></i>
 	<a class="article-tag-link" href="/tags/hexo/">hexo</a>
   </span>
 
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/09/23/深度学习-Faster-R-CNN-2/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
+        
 
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/04/0728人工智能RNN/">0728人工智能RNN</a>
-    </h1>
-  
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/09/23/深度学习-Faster-R-CNN-2/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <ol>
+<li>读论文</li>
+<li>debug code</li>
+</ol>
+<p>核心点：RPN<br>目标：能口述网络结构图，能实现nms算法，能实现IOU<br>时间点：20190923 读第一遍论文，整理中间所有的知识点<br><strong>知识点1</strong>: 准确率和召回率，mAP<br>准确率：认为是正样本中有多少被猜对了<br>召回率：所有正样本中有多少被找出了了<br>ground truth: 正确打标签的训练数据（x, label）,其中label是正确的标签<br>AP（Average Precision）：类别AP是P-R曲线所围成下面积<br>？Confidences:是怎么设计的？<br>mAP(mean Average Precision):物体检测中是不同物体的AP的平均值<br><strong>知识点2</strong>：交并比IOU<br>公式：<br>$$IOU=\frac{A\cap B}{A \cup B}$$<br><strong>知识点3</strong>：非极大值抑制NMS<br>nms: Non-Maximum Suppression<br>对于有重叠的候选区框：若大于规定阈值（某个提前设定的置信度？）则删除，低于<br>阈值的保留。对于无重叠的候选框：都保留。<br>代码实现过程：</p>
+<ol>
+<li>获得当前目标类别下的所有的bbx信息</li>
+<li>将bbx列表按照confidence从高到低排序，并记录当前confidence最大的bbx</li>
+<li>计算最大confidence对应的bbx与剩下所有的bbx的IOU，移除所有大于阈值的bbx</li>
+<li>对剩下的bbx，循环执行2, 3直到所有的bbx列表为空</li>
+</ol>
+<p><strong>知识点</strong>：R-CNN，Fast R-CNN, Faster R-CNN</p>
+<ol>
+<li>R-CNN: 选择候选框的方式：Selective Search.分类方式：每个物体进行20个SVM分类器；<br>针对每个类，通过计算IOU，采用非极大抑制算法，以置信度最高的区域为基础，删除那些重叠位置的区域。（nms算法）</li>
+</ol>
 
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://yongqiangyue.github.io/2019/09/23/深度学习-Faster-R-CNN-2/" title="深度学习-Faster R-CNN" target="_blank" rel="external">https://yongqiangyue.github.io/2019/09/23/深度学习-Faster-R-CNN-2/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://yongqiangyue.github.io" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://yongqiangyue.github.io" target="_blank"><span class="text-dark">岳岳博客</span><small class="ml-1x">爱折腾的老码农</small></a></h3>
+        <div>波波维奇的人生:工作魔鬼，生活好人。</div>
+      </div>
+    </figure>
   </div>
+</div>
+
+
+    </div>
+  </article>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/08/04/0728人工智能RNN/" class="article-date">
-	  <time datetime="2019-08-04T13:58:07.000Z" itemprop="datePublished">8月 4</time>
-	</a>
-</span>
     
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
     
+  </section>
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/08/04/0728人工智能RNN/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
 
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/01/数学公式-6/">数学公式</a>
-    </h1>
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
-
-  </div>
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/08/04/0728人工智能RNN/" title="0728人工智能RNN"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/08/01/数学公式-6/" class="article-date">
-	  <time datetime="2019-08-01T02:50:48.000Z" itemprop="datePublished">8月 1</time>
-	</a>
-</span>
-    
-    
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/08/01/数学公式-6/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/15/贝塔分布/">贝塔分布</a>
-    </h1>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
   
-
-  </div>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/07/15/贝塔分布/" class="article-date">
-	  <time datetime="2019-07-15T07:28:18.000Z" itemprop="datePublished">7月 15</time>
-	</a>
-</span>
+  <div class="bar-right">
     
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/数学/">数学</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/概率/">概率</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/07/15/贝塔分布/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/15/梯度下降-2/">梯度下降</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/07/15/梯度下降-2/" class="article-date">
-	  <time datetime="2019-07-15T03:55:23.000Z" itemprop="datePublished">7月 15</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/算法/">算法</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/07/15/梯度下降-2/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/12/参数估计/">参数估计</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/07/12/参数估计/" class="article-date">
-	  <time datetime="2019-07-12T02:58:31.000Z" itemprop="datePublished">7月 12</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/数学/">数学</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/概率/">概率</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/07/12/参数估计/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/10/折腾博客/">折腾博客</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/07/10/折腾博客/" class="article-date">
-	  <time datetime="2019-07-10T11:18:13.000Z" itemprop="datePublished">7月 10</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/程序员/">程序员</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/hexo/">hexo</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/07/10/折腾博客/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
+    <div class="share-component" data-sites="qq,wechat" data-mobile-sites="qq"></div>
     
   </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-   
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -608,6 +548,33 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
    
 
 
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
